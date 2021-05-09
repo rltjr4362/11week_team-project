@@ -2,21 +2,21 @@ import pandas as pd
 from bs4 import BeautifulSoup
 from selenium import webdriver
 
-url = 'https://coronaboard.kr/'
+url = 'https://coronaboard.kr'
 
-driver = webdriver.Chrome('C:/Users/82102/Desktop/first_git_project/team-project/chromedriver.exe')
+driver = webdriver.Chrome('chromedriver') # 크롬 드라이버 로드
 driver.get(url) # url 불러오기
 driver.implicitly_wait(3) # 3초 기다리기
+
+driver.find_element_by_xpath('/html/body/div[8]/div/div[3]/button').click()
+driver.find_element_by_xpath('/html/body/div[8]/div/div[3]/button').click()
 
 data = driver.page_source # 페이지 소스 가져오기
 
 soup = BeautifulSoup(data, 'html.parser')
+soup.select('#country-table > div > div > table')
 
-soup_select=soup.select('#country-table > div > div > table') #테이블 가져오기
-print(soup_select)
-df = pd.read_html(soup_select.prettify())[0]
-
-print(type(df))
+df = pd.read_html(soup.prettify())[0]
 
 print(df)
 
