@@ -1,8 +1,11 @@
 import pandas as pd
 from bs4 import BeautifulSoup
 from selenium import webdriver
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib as mpl
 
-url = 'https://coronaboard.kr'
+url = 'https://coronaboard.kr/'
 
 driver = webdriver.Chrome('chromedriver') # 크롬 드라이버 로드
 driver.get(url) # url 불러오기
@@ -36,3 +39,14 @@ c=c.replace(',','').split()
 c = [int(i) for i in c]
 
 print(c)
+
+
+e= a+' 코로나 현황'
+font_name = mpl.font_manager.FontProperties(fname='C:/Windows/Fonts/malgun.ttf').get_name()
+mpl.rc('font', family=font_name)
+x = np.arange(3)
+d=['확진자','사망자','완치']
+plt.bar(x, c,color="red")
+plt.xticks(x, d)
+plt.title(e)
+plt.show()
